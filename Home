@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wonder City Web Development | Websites for West Memphis businesses</title>
+<meta name="description" content="Wonder City Web Development designs, builds, and maintains websites for small businesses in West Memphis, Arkansas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Sampled directly from the Wonder City brand card */
+    --ink:      #00292E;
+    --teal:     #07363B;
+    --teal-lift:#0B454B;
+    --mint:     #30E8B0;
+    --sea:      #60D3A8;
+    --sky:      #80CFF5;
+    --paper:    #EAF6F3;
+    --paper-2:  #FFFFFF;
+    --white:    #FFFFFF;
+
+    --font-display: 'Outfit', 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+    --wrap: 1180px;
+    --gut: clamp(20px, 5vw, 56px);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--white);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+
+  .wrap{max-width:var(--wrap);margin:0 auto;padding-inline:var(--gut);}
+
+  /* ---------- shared type ---------- */
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--mint);
+    margin:0 0 18px;
+  }
+  .eyebrow.on-paper{color:#0E6E5C;}
+  h1,h2,h3{font-family:var(--font-display);font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:0;}
+  h2{font-size:clamp(2.1rem,5.2vw,3.5rem);}
+  h3{font-size:1.3rem;letter-spacing:-.015em;line-height:1.2;}
+  p{margin:0 0 1.1em;}
+  .lede{font-size:clamp(1.05rem,2.1vw,1.28rem);line-height:1.6;max-width:56ch;color:rgba(255,255,255,.82);}
+  .lede.on-paper{color:#28524F;}
+
+  /* ---------- the swoosh: the signature mark ---------- */
+  .swoosh{display:block;width:clamp(180px,26vw,300px);height:auto;overflow:visible;}
+  .swoosh path{
+    fill:none;stroke:var(--mint);stroke-linecap:round;
+    stroke-dasharray:520;stroke-dashoffset:520;
+    animation:draw 1.5s cubic-bezier(.22,.9,.3,1) forwards;
+  }
+  .swoosh path:nth-child(1){stroke-width:5;animation-delay:.5s;}
+  .swoosh path:nth-child(2){stroke-width:4;animation-delay:.72s;}
+  .swoosh.sm{width:132px;}
+  .swoosh.sm path{stroke-width:4.5;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:60;
+    backdrop-filter:blur(14px);
+    background:rgba(0,41,46,.55);
+    border-bottom:1px solid rgba(128,207,245,.14);
+  }
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:16px;}
+  .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;}
+  .brand b{font-family:var(--font-display);font-weight:800;font-size:1.18rem;letter-spacing:-.03em;}
+  .brand span{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sky);}
+  nav ul{display:flex;gap:30px;list-style:none;margin:0;padding:0;}
+  nav a{
+    text-decoration:none;font-size:.92rem;font-weight:500;
+    color:rgba(255,255,255,.76);padding-bottom:4px;
+    border-bottom:2px solid transparent;transition:color .2s,border-color .2s;
+  }
+  nav a:hover{color:var(--white);border-color:var(--mint);}
+  .nav-cta{
+    display:inline-block;text-decoration:none;font-weight:600;font-size:.9rem;
+    background:var(--mint);color:var(--ink);
+    padding:10px 20px;border-radius:100px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(48,232,176,.3);}
+  @media(max-width:860px){nav{display:none;}}
+
+  /* ---------- aurora background ---------- */
+  .aurora{position:relative;isolation:isolate;overflow:hidden;background:var(--teal);}
+  .aurora::before{
+    content:"";position:absolute;inset:-25%;z-index:-2;
+    background:
+      radial-gradient(38% 46% at 12% 26%, rgba(96,211,168,.92) 0%, rgba(96,211,168,0) 62%),
+      radial-gradient(42% 52% at 4% 4%,   rgba(128,207,245,.85) 0%, rgba(128,207,245,0) 60%),
+      radial-gradient(48% 44% at 22% 82%, rgba(128,207,245,.80) 0%, rgba(128,207,245,0) 64%),
+      radial-gradient(40% 40% at 88% 20%, rgba(128,207,245,.62) 0%, rgba(128,207,245,0) 62%),
+      radial-gradient(46% 50% at 66% 60%, rgba(0,41,46,.85)     0%, rgba(0,41,46,0)     70%);
+    filter:blur(46px);
+    animation:drift 26s ease-in-out infinite alternate;
+  }
+  .aurora::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(105deg, rgba(0,41,46,.30) 0%, rgba(7,54,59,.62) 48%, rgba(7,54,59,.42) 100%);
+  }
+  @keyframes drift{
+    from{transform:translate3d(0,0,0) scale(1);}
+    to{transform:translate3d(3%,-2.5%,0) scale(1.09);}
+  }
+  /* thin arcs, lifted from the top-right of the brand card */
+  .arcs{position:absolute;top:0;right:0;width:min(46vw,620px);z-index:0;pointer-events:none;opacity:.55;}
+  .arcs path{fill:none;stroke:var(--white);stroke-width:1.6;}
+
+  /* ---------- hero ---------- */
+  .hero{padding-block:clamp(76px,13vw,140px);}
+  .hero .wrap{position:relative;z-index:2;}
+  .hero h1{
+    font-size:clamp(2.9rem,9vw,6.4rem);
+    font-weight:800;letter-spacing:-.04em;line-height:.95;
+    max-width:14ch;
+    text-shadow:0 2px 40px rgba(0,41,46,.35);
+  }
+  .hero .lede{margin-top:30px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+  .btn{
+    display:inline-block;text-decoration:none;font-family:var(--font-display);
+    font-weight:600;font-size:1rem;padding:15px 30px;border-radius:100px;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn-primary{background:var(--mint);color:var(--ink);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(48,232,176,.34);}
+  .btn-ghost{border:1.5px solid rgba(128,207,245,.55);color:var(--white);}
+  .btn-ghost:hover{background:rgba(128,207,245,.13);transform:translateY(-2px);}
+  .hero-swoosh{margin-top:44px;}
+
+  /* ---------- marquee strip ---------- */
+  .strip{background:var(--mint);color:var(--ink);overflow:hidden;padding-block:13px;}
+  .strip-track{display:flex;gap:0;width:max-content;animation:slide 34s linear infinite;}
+  .strip span{
+    font-family:var(--font-mono);font-size:.76rem;letter-spacing:.2em;
+    text-transform:uppercase;padding-inline:26px;white-space:nowrap;font-weight:500;
+  }
+  @keyframes slide{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- generic section ---------- */
+  .section{padding-block:clamp(70px,10vw,118px);}
+  .section-dark{background:var(--ink);color:var(--white);}
+  .section-paper{background:var(--paper);color:#0F3B38;}
+  .section-head{max-width:62ch;margin-bottom:56px;}
+  .section-head h2 + .swoosh{margin-top:18px;}
+
+  /* ---------- services ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:20px;}
+  .card{
+    background:var(--teal);
+    border:1px solid rgba(128,207,245,.16);
+    border-radius:20px;padding:34px 30px 30px;
+    position:relative;overflow:hidden;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .card::before{
+    content:"";position:absolute;inset:0 0 auto 0;height:3px;
+    background:linear-gradient(90deg,var(--mint),var(--sky));
+    transform:scaleX(0);transform-origin:left;transition:transform .35s ease;
+  }
+  .card:hover{transform:translateY(-6px);border-color:rgba(48,232,176,.45);}
+  .card:hover::before{transform:scaleX(1);}
+  .card .tag{
+    font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--sky);display:block;margin-bottom:16px;
+  }
+  .card h3{margin-bottom:12px;color:var(--white);}
+  .card p{color:rgba(255,255,255,.72);font-size:.96rem;margin-bottom:0;}
+  .card ul{margin:16px 0 0;padding:0;list-style:none;}
+  .card li{
+    font-size:.9rem;color:rgba(255,255,255,.66);
+    padding-left:20px;position:relative;margin-bottom:7px;
+  }
+  .card li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:2px;background:var(--mint);}
+
+  /* ---------- process ---------- */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:34px;}
+  .step{border-top:2px solid rgba(15,59,56,.16);padding-top:20px;}
+  .step .num{
+    font-family:var(--font-mono);font-size:.74rem;letter-spacing:.16em;
+    color:#0E6E5C;display:block;margin-bottom:12px;
+  }
+  .step h3{color:#0F3B38;margin-bottom:9px;}
+  .step p{font-size:.94rem;color:#3A5F5C;margin-bottom:0;}
+
+  /* ---------- pricing ---------- */
+  .prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:12px;}
+  .price{
+    background:var(--paper-2);border:1px solid rgba(15,59,56,.12);
+    border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;
+  }
+  .price.featured{border:2px solid var(--sea);box-shadow:0 16px 40px rgba(15,59,56,.09);}
+  .price .name{font-family:var(--font-display);font-weight:700;font-size:1.14rem;color:#0F3B38;}
+  .price .fig{
+    font-family:var(--font-display);font-weight:800;font-size:2.5rem;
+    letter-spacing:-.035em;color:#0F3B38;margin:14px 0 4px;line-height:1;
+  }
+  .price .fig small{font-family:var(--font-mono);font-size:.72rem;font-weight:400;letter-spacing:.1em;color:#54746F;}
+  .price .who{font-size:.9rem;color:#3A5F5C;margin:0 0 18px;}
+  .price ul{list-style:none;margin:0 0 24px;padding:0;}
+  .price li{
+    font-size:.92rem;color:#3A5F5C;padding-left:22px;
+    position:relative;margin-bottom:9px;
+  }
+  .price li::before{
+    content:"";position:absolute;left:0;top:.46em;width:11px;height:6px;
+    border-left:2px solid var(--sea);border-bottom:2px solid var(--sea);
+    transform:rotate(-45deg);
+  }
+  .price .go{
+    margin-top:auto;text-decoration:none;font-family:var(--font-display);font-weight:600;
+    font-size:.94rem;text-align:center;padding:13px 22px;border-radius:100px;
+    background:#0F3B38;color:var(--white);transition:background .2s ease;
+  }
+  .price.featured .go{background:var(--sea);color:#04312A;}
+  .price .go:hover{background:var(--mint);color:var(--ink);}
+  .price-note{font-size:.9rem;color:#3A5F5C;margin-top:26px;max-width:60ch;}
+
+  /* ---------- about ---------- */
+  .about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(34px,6vw,76px);align-items:center;}
+  @media(max-width:860px){.about{grid-template-columns:1fr;}}
+  .portrait{
+    aspect-ratio:4/5;border-radius:22px;overflow:hidden;position:relative;
+    background:linear-gradient(150deg,var(--sea),var(--sky) 48%,var(--teal));
+    display:flex;align-items:flex-end;padding:26px;
+  }
+  .portrait .cap{
+    font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:rgba(0,41,46,.72);background:rgba(255,255,255,.72);
+    padding:9px 14px;border-radius:100px;
+  }
+  .about h2{color:#0F3B38;}
+  .about p{color:#3A5F5C;}
+  .about .pull{
+    font-family:var(--font-display);font-weight:600;font-size:1.2rem;
+    line-height:1.4;color:#0F3B38;border-left:3px solid var(--sea);
+    padding-left:20px;margin:26px 0;
+  }
+
+  /* ---------- local note ---------- */
+  .local{background:var(--teal);}
+  .local .wrap{
+    padding-block:clamp(52px,7vw,78px);
+    display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,46px);align-items:center;
+  }
+  @media(max-width:760px){.local .wrap{grid-template-columns:1fr;}}
+  .local .year{
+    font-family:var(--font-display);font-weight:800;font-size:clamp(3rem,9vw,5rem);
+    letter-spacing:-.045em;color:var(--mint);line-height:.9;
+  }
+  .local p{color:rgba(255,255,255,.82);margin:0;max-width:62ch;font-size:1.03rem;}
+
+  /* ---------- contact ---------- */
+  .contact{position:relative;}
+  .contact .wrap{position:relative;z-index:2;padding-block:clamp(76px,11vw,124px);text-align:center;}
+  .contact h2{margin-bottom:18px;}
+  .contact .lede{margin-inline:auto;text-align:center;}
+  .contact .swoosh{margin:22px auto 0;}
+  .lines{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;
+    margin-top:38px;font-family:var(--font-mono);font-size:.95rem;
+  }
+  .lines a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(128,207,245,.4);padding-bottom:3px;}
+  .lines a:hover{color:var(--mint);border-color:var(--mint);}
+  .contact .btn{margin-top:34px;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);border-top:1px solid rgba(128,207,245,.14);}
+  .foot{
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;
+    padding-block:30px;font-size:.86rem;color:rgba(255,255,255,.5);
+  }
+  .foot a{color:rgba(255,255,255,.66);text-decoration:none;}
+  .foot a:hover{color:var(--mint);}
+
+  /* ---------- a11y + motion ---------- */
+  a:focus-visible,button:focus-visible{
+    outline:3px solid var(--mint);outline-offset:3px;border-radius:4px;
+  }
+  .skip{
+    position:absolute;left:-9999px;top:8px;background:var(--mint);color:var(--ink);
+    padding:10px 18px;border-radius:8px;z-index:200;font-weight:600;text-decoration:none;
+  }
+  .skip:focus{left:16px;}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;}
+    html{scroll-behavior:auto;}
+    .swoosh path{stroke-dashoffset:0;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top">
+      <b>Wonder City</b><span>Web Development</span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">How it works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#contact">Start a project</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="aurora hero" id="top">
+    <svg class="arcs" viewBox="0 0 620 420" aria-hidden="true">
+      <path d="M 96 8 C 236 148, 430 226, 620 236"/>
+      <path d="M 452 -20 C 500 150, 560 300, 616 420"/>
+    </svg>
+    <div class="wrap">
+      <p class="eyebrow">West Memphis, Arkansas &nbsp;/&nbsp; Est. 2026</p>
+      <h1>Wonder City Web&nbsp;Development</h1>
+      <svg class="swoosh hero-swoosh" viewBox="0 0 440 46" aria-hidden="true">
+        <path d="M 6 30 C 118 16, 296 4, 434 12"/>
+        <path d="M 158 40 C 244 36, 344 24, 432 13"/>
+      </svg>
+      <p class="lede">Websites for the businesses on Broadway, Missouri Street, and everywhere in between. Designed, built, and looked after by somebody who actually lives here.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Start a project</a>
+        <a class="btn btn-ghost" href="#pricing">See pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STRIP ================= -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span>Restaurants</span><span>&bull;</span><span>Barbershops &amp; salons</span><span>&bull;</span>
+      <span>Contractors</span><span>&bull;</span><span>Churches</span><span>&bull;</span>
+      <span>Auto shops</span><span>&bull;</span><span>Lawn care</span><span>&bull;</span>
+      <span>Daycares</span><span>&bull;</span><span>Food trucks</span><span>&bull;</span>
+      <span>Restaurants</span><span>&bull;</span><span>Barbershops &amp; salons</span><span>&bull;</span>
+      <span>Contractors</span><span>&bull;</span><span>Churches</span><span>&bull;</span>
+      <span>Auto shops</span><span>&bull;</span><span>Lawn care</span><span>&bull;</span>
+      <span>Daycares</span><span>&bull;</span><span>Food trucks</span><span>&bull;</span>
+    </div>
+  </div>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="section section-dark" id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">What I do</p>
+        <h2>Three things, done properly.</h2>
+        <p class="lede" style="margin-top:20px;">Most local businesses don't need a big agency. They need a site that loads fast, says the right thing, and doesn't quietly break six months later.</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <span class="tag">Design</span>
+          <h3>Make it look like you</h3>
+          <p>A layout built around what your customers came to find, not a stock template with your logo dropped in.</p>
+          <ul>
+            <li>Colors and type that match your sign</li>
+            <li>Photos of your actual shop</li>
+            <li>Readable on a phone in the parking lot</li>
+          </ul>
+        </article>
+        <article class="card reveal">
+          <span class="tag">Build</span>
+          <h3>Put it online</h3>
+          <p>Hand-coded pages, no bloated page builder. I handle the domain, the hosting setup, and the boring parts.</p>
+          <ul>
+            <li>Loads in under two seconds</li>
+            <li>Click-to-call and click-for-directions</li>
+            <li>Shows up when people search your name</li>
+          </ul>
+        </article>
+        <article class="card reveal">
+          <span class="tag">Maintain</span>
+          <h3>Keep it current</h3>
+          <p>New hours, new menu, new prices. Text me the change and it's live the same week, usually the same day.</p>
+          <ul>
+            <li>Content updates without a ticket system</li>
+            <li>Backups and security patches</li>
+            <li>A real person who answers</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LOCAL NOTE ================= -->
+  <section class="local">
+    <div class="wrap reveal">
+      <div class="year">1930s</div>
+      <p>West Memphis grew so fast out of the timber and swampland that people started calling it the Wonder City. Ninety years on, the businesses here are still worth showing off. That's where the name came from.</p>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section class="section section-paper" id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow on-paper">How it works</p>
+        <h2 style="color:#0F3B38;">From first call to live site.</h2>
+        <svg class="swoosh sm" viewBox="0 0 440 46" aria-hidden="true">
+          <path d="M 6 30 C 118 16, 296 4, 434 12" stroke="#2BB98F"/>
+          <path d="M 158 40 C 244 36, 344 24, 432 13" stroke="#2BB98F"/>
+        </svg>
+        <p class="lede on-paper" style="margin-top:20px;">Four steps. Two to three weeks for most projects.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="num">01 &nbsp;/&nbsp; Week 1</span>
+          <h3>We talk</h3>
+          <p>Twenty minutes, free, at your shop or over the phone. What you sell, who buys it, what you want the site to do.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">02 &nbsp;/&nbsp; Week 1</span>
+          <h3>You see a draft</h3>
+          <p>A real page you can click through, not a slideshow. You tell me what's wrong with it and I fix it.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">03 &nbsp;/&nbsp; Week 2&ndash;3</span>
+          <h3>It goes live</h3>
+          <p>I connect the domain, set up hosting, and get you listed so you turn up in local search. You own everything.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">04 &nbsp;/&nbsp; Ongoing</span>
+          <h3>I keep it running</h3>
+          <p>Updates, fixes, and seasonal changes. Optional, month to month, cancel whenever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRICING ================= -->
+  <section class="section section-paper" id="pricing" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow on-paper">Pricing</p>
+        <h2 style="color:#0F3B38;">Plain numbers, no estimate call.</h2>
+        <p class="lede on-paper" style="margin-top:20px;">You pay half to start and half when the site goes live. No contracts, no retainers you can't get out of.</p>
+      </div>
+      <div class="prices">
+        <div class="price reveal">
+          <span class="name">One-Pager</span>
+          <div class="fig">$450</div>
+          <p class="who">For a shop that mostly needs to be findable.</p>
+          <ul>
+            <li>Single scrolling page</li>
+            <li>Hours, map, and phone</li>
+            <li>Contact form</li>
+            <li>Google Business setup</li>
+          </ul>
+          <a class="go" href="#contact">Get started</a>
+        </div>
+        <div class="price featured reveal">
+          <span class="name">Full Site</span>
+          <div class="fig">$850</div>
+          <p class="who">For a business with services, a menu, or a story to tell.</p>
+          <ul>
+            <li>Four to six pages</li>
+            <li>Photo gallery</li>
+            <li>Menu, services, or price list</li>
+            <li>Reviews section</li>
+            <li>Everything in One-Pager</li>
+          </ul>
+          <a class="go" href="#contact">Get started</a>
+        </div>
+        <div class="price reveal">
+          <span class="name">Care Plan</span>
+          <div class="fig">$40<small> / month</small></div>
+          <p class="who">For when things change and you don't want to think about it.</p>
+          <ul>
+            <li>Unlimited small text edits</li>
+            <li>Monthly backups</li>
+            <li>Security and uptime checks</li>
+            <li>Same-week turnaround</li>
+          </ul>
+          <a class="go" href="#contact">Add it on</a>
+        </div>
+      </div>
+      <p class="price-note reveal">Nonprofits and first-year businesses in Crittenden County get 20% off the build. Ask about it.</p>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section section-paper" id="about" style="padding-top:0;">
+    <div class="wrap about">
+      <div class="reveal">
+        <p class="eyebrow on-paper">Who you're hiring</p>
+        <h2>Spencer Sullivan</h2>
+        <p style="margin-top:22px;">I'm 15, I go to school in Memphis, and I live in the Delta. I started building websites because I like writing code and I kept noticing that businesses I drive past every day either have nothing online or have something that hasn't been touched since 2014.</p>
+        <p class="pull">You get the person who wrote the code, not a ticket number in another time zone.</p>
+        <p>That's the whole pitch. I work with a small number of clients at a time so nobody waits. My rates are low because my overhead is low, not because the work is rushed. And when something breaks, you text me and I fix it.</p>
+      </div>
+      <div class="portrait reveal" role="img" aria-label="Placeholder for a photo of Spencer Sullivan">
+        <span class="cap">Add photo here</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="aurora contact" id="contact">
+    <svg class="arcs" viewBox="0 0 620 420" aria-hidden="true" style="opacity:.4;">
+      <path d="M 96 8 C 236 148, 430 226, 620 236"/>
+      <path d="M 452 -20 C 500 150, 560 300, 616 420"/>
+    </svg>
+    <div class="wrap">
+      <p class="eyebrow">Get in touch</p>
+      <h2>Let's put your business on the map.</h2>
+      <svg class="swoosh" viewBox="0 0 440 46" aria-hidden="true">
+        <path d="M 6 30 C 118 16, 296 4, 434 12"/>
+        <path d="M 158 40 C 244 36, 344 24, 432 13"/>
+      </svg>
+      <p class="lede" style="margin-top:26px;">Tell me what you do and what you want people to be able to find. First conversation is free and takes about twenty minutes.</p>
+      <div class="lines">
+        <a href="mailto:hello@wondercitywebdev.com">hello@wondercitywebdev.com</a>
+        <a href="tel:+18705550142">(870) 555-0142</a>
+      </div>
+      <a class="btn btn-primary" href="mailto:hello@wondercitywebdev.com">Email Spencer</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>&copy; 2026 Wonder City Web Development &nbsp;/&nbsp; West Memphis, Arkansas</span>
+    <span><a href="mailto:hello@wondercitywebdev.com">hello@wondercitywebdev.com</a></span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('in'), i * 70);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => io.observe(el));
+  } else {
+    els.forEach(el => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>
