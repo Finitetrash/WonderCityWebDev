@@ -210,14 +210,10 @@
   @media(max-width:860px){.about{grid-template-columns:1fr;}}
   .portrait{
     aspect-ratio:4/5;border-radius:22px;overflow:hidden;position:relative;
-    background:linear-gradient(150deg,var(--sea),var(--sky) 48%,var(--teal));
-    display:flex;align-items:flex-end;padding:26px;
+    margin:0;background:#E9E3DB;
+    box-shadow:0 18px 44px rgba(15,59,56,.14);
   }
-  .portrait .cap{
-    font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;
-    text-transform:uppercase;color:rgba(0,41,46,.72);background:rgba(255,255,255,.72);
-    padding:9px 14px;border-radius:100px;
-  }
+  .portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;}
   .about h2{color:#0F3B38;}
   .about p{color:#3A5F5C;}
   .about .pull{
@@ -359,11 +355,11 @@
         <article class="card reveal">
           <span class="tag">Build</span>
           <h3>Put it online</h3>
-          <p>Hand-coded pages, no bloated page builder. I handle the domain, the hosting setup, and the boring parts.</p>
+          <p>I build the pages, test them on real phones, and handle the domain and hosting setup. You never have to log into a control panel.</p>
           <ul>
-            <li>Loads in under two seconds</li>
+            <li>Images compressed so it isn't sluggish on cell data</li>
             <li>Click-to-call and click-for-directions</li>
-            <li>Shows up when people search your name</li>
+            <li>Google Business Profile set up and connected</li>
           </ul>
         </article>
         <article class="card reveal">
@@ -435,9 +431,10 @@
         <p class="pull">You get the person who wrote the code, not a ticket number in another time zone.</p>
         <p>I live in the Delta and I'm a high school student in Memphis, 15 as of this year. I take on a small number of clients at a time so nobody sits waiting, and my overhead is low, which keeps the work affordable without making it rushed. When something breaks, you text me and I fix it.</p>
       </div>
-      <div class="portrait reveal" role="img" aria-label="Placeholder for a photo of Spencer Sullivan">
-        <span class="cap">Add photo here</span>
-      </div>
+      <figure class="portrait reveal">
+        <img src="spencer-sullivan.jpg" width="556" height="695" loading="lazy"
+             alt="Spencer Sullivan, founder of Wonder City Web Development">
+      </figure>
     </div>
   </section>
 
